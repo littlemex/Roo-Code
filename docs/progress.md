@@ -47,15 +47,15 @@
   - [checkpoints-feature.md](checkpoints-feature.md): チェックポイント機能の詳細な分析
   - [terminal-integration.md](terminal-integration.md): ターミナル統合の詳細な分析
   - [browser-integration.md](browser-integration.md): ブラウザ統合の詳細な分析
+- ユースケースの分析と文書化:
+  - [task-execution-flow.md](task-execution-flow.md): タスクの実行フロー
+  - [tool-execution-flow.md](tool-execution-flow.md): ツールの実行フロー
+  - [error-handling.md](error-handling.md): エラー処理
 
 ### 2025-02-27
 
 #### 予定
 
-- 残りのユースケース分析と文書化:
-  - task-execution-flow.md: タスクの実行フロー
-  - tool-execution-flow.md: ツールの実行フロー
-  - error-handling.md: エラー処理
 - 拡張機能の設定とカスタマイズの文書化:
   - extension-settings.md: 設定オプション
   - custom-modes.md: カスタムモード
@@ -148,6 +148,24 @@
     - BrowserSession, UrlContentFetcher の役割と関係
     - ブラウザ操作のフロー
 
+15. **task-execution-flow.md**
+    - タスクの実行フロー
+    - ユーザー入力からタスク完了までのフロー
+    - タスクの状態管理
+    - タスクの再開と中断の処理
+
+16. **tool-execution-flow.md**
+    - ツールの実行フロー
+    - ツールの登録と実行のメカニズム
+    - ツール実行結果の処理
+    - ツールの種類と特性
+
+17. **error-handling.md**
+    - エラー処理のメカニズム
+    - エラーの種類と処理方法
+    - エラーメッセージの表示
+    - エラーからの回復
+
 ## 主要なクラスと機能
 
 ### ClineProvider
@@ -176,18 +194,7 @@ Model Context Protocol (MCP) サーバーとの通信を管理するクラスで
 
 ## 次のステップ
 
-1. ユースケースの分析と文書化
-   - **task-execution-flow.md**: タスクの実行フロー
-     - ユーザー入力からタスク完了までのフロー
-     - タスクの状態管理
-   - **tool-execution-flow.md**: ツールの実行フロー
-     - ツールの登録と実行のメカニズム
-     - ツール実行結果の処理
-   - **error-handling.md**: エラー処理
-     - エラーの種類と処理方法
-     - エラーメッセージの表示
-
-2. 拡張機能の設定とカスタマイズの文書化
+1. 拡張機能の設定とカスタマイズの文書化
    - **extension-settings.md**: 設定オプション
      - 利用可能な設定項目とその効果
      - 設定の保存と読み込み
@@ -198,6 +205,18 @@ Model Context Protocol (MCP) サーバーとの通信を管理するクラスで
      - ツールの定義と登録
      - ツールの実行と結果の処理
 
+## 調査メモ
+
+### 拡張機能の設定に関する調査状況
+
+- `src/core/config/ConfigManager.ts`: API設定の管理を担当するクラス
+- `src/core/config/CustomModesManager.ts`: カスタムモードの管理を担当するクラス
+- `src/core/config/CustomModesSchema.ts`: カスタムモードのスキーマ定義
+- `package.json`: 拡張機能の設定オプションの定義（`contributes.configuration`セクション）
+- `src/extension.ts`: 拡張機能のアクティベーション時に設定を読み込む処理
+
+次回は、これらのファイルを詳細に分析し、拡張機能の設定とカスタマイズに関するドキュメントを作成する予定です。
+
 ## まとめ
 
 Roo Code は VSCode の拡張機能として実装されており、AI モデルを使用してコーディングタスクを支援します。拡張機能は複数のモジュールに分かれており、それぞれが特定の機能を担当しています。主要なクラスは Cline で、AI モデルとの通信、ツールの実行、メッセージの管理などを担当しています。
@@ -206,8 +225,10 @@ Roo Code は VSCode の拡張機能として実装されており、AI モデル
 
 UI は React を使用して実装されており、VSCode の Webview API を通じて表示されます。UI は複数のコンポーネントに分割され、React コンテキストを使用して状態を管理しています。
 
-現在、リポジトリの基本構造と主要なクラスの分析が完了しており、14のドキュメントが作成されています。最初の8つのドキュメントでは、リポジトリ構造、コアクラス、拡張機能のアクティベーション、Clineクラス、APIプロバイダー、Webview UI、MCP実装、クラス図について詳細に説明しています。
+現在、リポジトリの基本構造と主要なクラスの分析が完了しており、17のドキュメントが作成されています。最初の8つのドキュメントでは、リポジトリ構造、コアクラス、拡張機能のアクティベーション、Clineクラス、APIプロバイダー、Webview UI、MCP実装、クラス図について詳細に説明しています。
 
 さらに、src/integrations/、src/services/、src/utils/ディレクトリの詳細な分析と、チェックポイント機能、ターミナル統合、ブラウザ統合の詳細な分析を行い、6つの追加ドキュメントを作成しました。
 
-次のステップでは、タスク実行フロー、ツール実行フロー、エラー処理などのユースケースの分析と、拡張機能の設定とカスタマイズに関する文書化を行う予定です。これにより、Roo Code の実装の全体像を把握し、各コンポーネントの役割と関係を明確にすることができます。
+また、タスク実行フロー、ツール実行フロー、エラー処理に関する3つのドキュメントを作成し、ユースケースの分析と文書化を行いました。
+
+次のステップでは、拡張機能の設定とカスタマイズに関する文書化を行う予定です。これにより、Roo Code の実装の全体像を把握し、各コンポーネントの役割と関係を明確にすることができます。
